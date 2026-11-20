@@ -1,61 +1,75 @@
-# 01 Introduction
+# Introduction
 
 ## Overview
 
-This project documents the design, deployment, and security assessment of an enterprise-style Active Directory home lab. The environment was built to provide hands-on experience with Windows domain administration, offensive security techniques, and defensive security practices within a safe and isolated virtual environment.
+This project documents the design, deployment, security assessment, and
+hardening of an Active Directory environment built entirely within an
+isolated virtual lab.
 
-The lab simulates a small enterprise network consisting of a Windows Server domain controller, Windows client machines, and a Kali Linux attacker system. This enables realistic demonstrations of Active Directory management, common attack techniques, and security hardening measures without impacting production systems.
+The environment consists of a Windows Server 2025 Domain Controller, a
+domain-joined Windows 11 workstation, and a Kali Linux system used for
+security testing. The machines operate on an isolated VMware host-only
+network, allowing Active Directory attacks and defensive techniques to be
+tested safely without interacting with external systems.
 
----
+The project follows the environment through its complete security lifecycle:
+initial deployment and configuration, reconnaissance and enumeration,
+attack simulation, detection, remediation, and security validation.
 
 ## Objectives
 
-The primary objectives of this project are to:
+The primary objectives of the project are to:
 
-- Build and configure an enterprise Active Directory environment.
-- Gain practical experience with Windows Server administration.
-- Understand how Active Directory authentication and authorization operate.
-- Perform common penetration testing techniques against a controlled environment.
-- Implement security hardening and defensive configurations.
-- Develop incident detection and response skills.
-- Document the complete process.
+- Build and administer a functional Windows Active Directory domain
+- Configure users, groups, Organizational Units, DNS, and Group Policy
+- Deploy and manage a domain-joined Windows workstation
+- Perform Active Directory reconnaissance and enumeration
+- Simulate common Active Directory attack techniques
+- Analyze attack activity using Windows security telemetry
+- Identify and remediate security weaknesses
+- Validate mitigations by repeating security tests after hardening
 
----
+## Lab Environment
 
-## Technologies
+| System | Operating System | Role | IP Address |
+|---|---|---|---|
+| DC01 | Windows Server 2025 | Domain Controller / DNS | 192.168.10.10 |
+| CLIENT01 | Windows 11 | Domain Workstation | 192.168.10.20 |
+| KALI01 | Kali Linux | Security Testing | 192.168.10.30 |
 
-### Host System
+**Domain:** `lab.local`  
+**Network:** `192.168.10.0/24`  
+**Virtualization:** VMware Workstation Pro  
+**Network Type:** Isolated host-only network (VMnet2)
 
-- Windows 11
-- VMware Workstation Pro
+## Project Scope
 
-### Virtual Machines
+The project covers both offensive and defensive aspects of Active Directory
+security. Security testing includes service discovery, domain enumeration,
+credential and authentication attacks, privilege escalation, lateral
+movement, and Active Directory permission abuse.
 
-- Windows Server 2022 (Domain Controller)
-- Windows 11 Enterprise (Domain Client)
-- Kali Linux (Attacker Machine)
+Defensive work includes Windows auditing, authentication monitoring,
+PowerShell logging, analysis of relevant Windows events, account and
+privilege hardening, service-account security, and Group Policy
+configuration.
 
-### Core Technologies
+All security testing is performed exclusively against systems created for
+this lab.
 
-- Active Directory Domain Services (AD DS)
-- DNS
-- Group Policy
-- PowerShell
-- Bash
+## Methodology
 
----
+The project is divided into five main phases:
 
-## Scope
+1. **Build** — Deploy and configure the Active Directory environment.
+2. **Enumerate** — Discover systems, services, accounts, and trust
+   relationships from the security-testing machine.
+3. **Attack** — Reproduce selected Active Directory attack techniques in
+   the controlled environment.
+4. **Detect and Harden** — Analyze the resulting telemetry and implement
+   appropriate security controls.
+5. **Validate** — Repeat relevant tests to determine whether the implemented
+   mitigations are effective.
 
-This repository documents every stage of the lab, including:
-
-- Environment design
-- Active Directory deployment
-- Network configuration
-- Domain administration
-- Attack simulations
-- Detection and monitoring
-- Security hardening
-- Lessons learned
-
-The lab is intended solely for educational purposes. All offensive security activities are performed within an isolated virtual environment that I own and control.
+Detailed procedures, evidence, findings, and remediation steps are documented
+in the subsequent sections of the repository.
